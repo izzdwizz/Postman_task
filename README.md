@@ -2,9 +2,7 @@
 
 # Hotel Management API
 
-This is a simple Node.js Express API for managing hotel rooms.
-
-[Click to run the live link on browser](https://hotelapitask10node1ucee.onrender.com/api/v1/rooms)
+Express API for managing hotel rooms.
 
 ## Requirements
 
@@ -13,7 +11,7 @@ This is a simple Node.js Express API for managing hotel rooms.
 
 ## Installation
 
-1. Clone the repository: [repo link...](https://github.com/solowiseCV/HotelApiTask11);
+1. Clone the repository
 
 2. Install dependencies: npm install
 
@@ -26,5 +24,3 @@ This is a simple Node.js Express API for managing hotel rooms.
 Start the server:
 
 - npm start server.js
-
-By default, the server runs on port 3000. You can change the port by setting the `PORT` environment variable.
