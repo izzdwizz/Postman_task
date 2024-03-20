@@ -1,6 +1,4 @@
-# HotelRestApiTask11
-
-# Hotel Management API
+# First Look at API management
 
 Express API for managing hotel rooms.
 
