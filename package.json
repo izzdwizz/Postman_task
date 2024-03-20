@@ -1,0 +1,20 @@
+{
+	"name": "task11",
+	"version": "1.0.0",
+	"description": "First Look into Nodejs",
+	"main": "server.js",
+	"type": "module",
+	"scripts": {
+		"start": "nodemon app.js"
+	},
+	"author": "Izuchukwu Uchendu",
+	"license": "ISC",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"express": "^4.19.0",
+		"express-async-handler": "^1.2.0",
+		"mongoose": "^8.2.2",
+		"nodemon": "^3.1.0"
+	}
+}
