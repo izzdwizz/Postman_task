@@ -8,7 +8,7 @@ const RoomsTypeSchema = new Schema(
 	{
 		name: {
 			type: String,
-			required: [true, 'Please input name field'],
+			// required: [true, 'Please input name field'],
 			trim: true,
 			unique: true,
 			minlength: [3, 'The name provided must be atlease 3 charaters long'],

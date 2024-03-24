@@ -12,8 +12,9 @@ const Room = new Schema(
 			unique: true,
 		},
 		roomType: {
-			type: Schema.Types.ObjectId,
-			ref: 'RoomType',
+			type: String, // Change type to String
+			required: [true, 'Input roomType in the field provided'],
+			trim: true,
 		},
 		price: {
 			type: Number,

@@ -30,7 +30,7 @@ export const createRoom = asyncHandler(async (req, res) => {
 
 	try {
 		const newRoom = await saveNewRoom({ name, roomType, price });
-		res.status(201).json(newRoom);
+		res.status(201).json({ message: 'Successful', data: { newRoom } });
 	} catch (error) {
 		res.status(500);
 		throw new Error('Invalid Room data');

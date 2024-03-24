@@ -7,6 +7,6 @@ import {
 const router = express.Router();
 
 router.post('/room-type', createRoomType);
-router.get('/rooms-type', getAllRoomsType);
+router.get('/room-type', getAllRoomsType);
 
 export default router;

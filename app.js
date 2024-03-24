@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/api/', rootRouter);
+app.use('/api/v1', rootRouter);
 app.get('/', (req, res) => {
 	res.send('Hello, world! Please enter a valid url');
 });
@@ -29,7 +29,7 @@ app.use('*', (req, res) => {
 
 database();
 
-const PORT = process.env.PORT || 5000;
-app.listen(5000, () => {
+const PORT = process.env.PORT || 3838;
+app.listen(3838, () => {
 	console.log(`Server running on port ${PORT}`);
 });
