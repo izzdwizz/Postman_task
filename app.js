@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import database from './db/db.js';
 import baseRoute from './routes/index.js';
 import dotenv from 'dotenv';
+import authRouter from './routes/authRouter.js';
 dotenv.config();
 
 const app = express();
@@ -16,6 +17,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api/v1', rootRouter);
+app.use('/api/v1/users', authRouter);
+
 app.get('/', (req, res) => {
 	res.send('Hello, world! Please enter a valid url');
 });
