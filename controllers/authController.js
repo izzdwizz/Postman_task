@@ -20,10 +20,20 @@ export const signup = asyncHandler(async (req, res, next) => {
 		res.status(400);
 		throw new Error('Name field must be at least 3 characters');
 	}
-	const newUser = await User.create(req.body);
+	const existsRoom = await User.findOne({ name });
+	if (existsRoom) {
+		res.status(409);
+		throw new Error('User already exists with the same name');
+	}
 
-	const token = signToken(newUser._id);
-	res.status(201).json({ status: 'success', token, data: { user: newUser } });
+	try {
+		const newUser = await User.create(req.body);
+		const token = signToken(newUser._id);
+		res.status(201).json({ status: 'success', token, data: { user: newUser } });
+	} catch (error) {
+		res.status(500);
+		throw new Error(`${error.message}`);
+	}
 });
 
 export const login = asyncHandler(async (req, res, next) => {
@@ -32,7 +42,7 @@ export const login = asyncHandler(async (req, res, next) => {
 	if (!email || !password) {
 		res.status(401).json({
 			status: 'failed',
-			message: 'Please provide email ID and password',
+			message: 'Please provide a valid email ID and password',
 		});
 		return next();
 	}

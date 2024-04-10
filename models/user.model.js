@@ -33,6 +33,8 @@ const userSchema = new mongoose.Schema({
 		},
 	},
 
+	passwordChangedAT: Date,
+
 	role: {
 		type: String,
 		enum: ['admin', 'guest'],
@@ -51,6 +53,14 @@ userSchema.pre('save', async function (next) {
 
 userSchema.methods.comparePasswordInDB = async function (pswd, pswdDB) {
 	return await bcrypt.compare(pswd, pswdDB);
+};
+
+// password CHange
+userSchema.methods.isPasswordChanged = async function (JWTstamp) {
+	if (this.passwordChangedAT) {
+		console.log(this.passwordChangedAT, JWTstamp);
+	}
+	return false;
 };
 
 const User = mongoose.model('User', userSchema);

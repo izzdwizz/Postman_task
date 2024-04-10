@@ -1,26 +1,22 @@
 import asyncHandler from 'express-async-handler';
 import jsonwebtoken from 'jsonwebtoken';
 import util from 'util';
+import User from '../models/user.model.js';
+
 export default asyncHandler(async function ProtectMiddleware(req, res, next) {
 	// Read token and check if exists
 
 	const jwt = jsonwebtoken;
-	const testToken = req.headers.Authorization;
+	const testToken = req.headers.authorization;
 	let token;
 	if (testToken && testToken.startsWith('bearer')) {
-		token = testToken.split('')[1];
+		token = testToken.split(' ')[1];
 	}
 
 	if (!token) {
 		res.status(400);
+		console.log("can't access token");
 		throw new Error('You are not logged in');
-	}
-	try {
-		const newRoom = await saveNewRoom({ name, roomType, price });
-		res.status(201).json({ message: 'Successful', data: { newRoom } });
-	} catch (error) {
-		res.status(500);
-		throw new Error('Invalid Room data');
 	}
 
 	// Validate
@@ -29,7 +25,24 @@ export default asyncHandler(async function ProtectMiddleware(req, res, next) {
 		process.env.SECRET_STR
 	);
 
+	const user = await User.findById(decodedToken.id);
 	// If user Exists in Database
+	if (!user) {
+		const error = new Error("the user with given token doesn't exist");
+		console.log(user);
+		next(error);
+	}
 
-	next();
+	// If Password is changed
+	user.isPasswordChanged(decodedToken.iat);
 });
+export const restrict = (role) => {
+	return (req, res, next) => {
+		if (!req.user.role !== role) {
+			const error = new Error('You are not logged in');
+			next(error);
+		}
+
+		next();
+	};
+};
